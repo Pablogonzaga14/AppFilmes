@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("titulo",filmeList.get(position).getTitulo());
                         intent.putExtra("descricao",filmeList.get(position).getDescricao());
                         intent.putExtra("elenco",filmeList.get(position).getElenco());
+                        intent.putExtra("video",filmeList.get(position).getVideo());
                         startActivity(intent);
                     }
 

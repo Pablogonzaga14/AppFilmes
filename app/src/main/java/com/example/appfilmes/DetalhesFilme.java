@@ -1,6 +1,8 @@
 package com.example.appfilmes;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +35,9 @@ public class DetalhesFilme extends AppCompatActivity {
         String titulo = getIntent().getStringExtra("titulo");
         String descricao = getIntent().getStringExtra("descricao");
         String elenco = getIntent().getStringExtra("elenco");
+        String video = getIntent().getStringExtra("video");
+
+        String stVideo = video;
 
         Glide.with(getApplicationContext()).load(capa).into(dtCapaFilme);
         dtTituloFilme.setText(titulo);
@@ -41,7 +46,18 @@ public class DetalhesFilme extends AppCompatActivity {
 
         //Configurar toolbar
         toolbarDetalhes.setNavigationOnClickListener(view -> finish());
+
+        playVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetalhesFilme.this,Video.class);
+                intent.putExtra("video",stVideo);
+                startActivity(intent);
+            }
+        });
     }
+
+
 
     public void InciarComponentes(){
         dtCapaFilme = findViewById(R.id.dtCapaFilme);
