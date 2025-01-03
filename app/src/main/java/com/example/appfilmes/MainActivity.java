@@ -1,6 +1,9 @@
 package com.example.appfilmes;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.appfilmes.Adapter.AdapterFilme;
 import com.example.appfilmes.Model.Filme;
 import com.example.appfilmes.Model.FilmeApi;
+import com.example.appfilmes.OnClick.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,29 @@ public class MainActivity extends AppCompatActivity {
 
         IniciarComponestes();
         filmeList = new ArrayList<>();
+
+//Eventos de click da recyclerview
+        recyclerView_filmes.addOnItemTouchListener(new RecyclerItemClickListener(
+                getApplicationContext(),
+                recyclerView_filmes,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(getApplicationContext(),DetalhesFilme.class);
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+                }
+        ));
 
 
 // Configurar retrofit
