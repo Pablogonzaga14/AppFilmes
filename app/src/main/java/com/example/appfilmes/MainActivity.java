@@ -12,9 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appfilmes.Adapter.AdapterFilme;
 import com.example.appfilmes.Model.Filme;
+import com.example.appfilmes.Model.FilmeApi;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,27 +40,38 @@ public class MainActivity extends AppCompatActivity {
 
         IniciarComponestes();
         filmeList = new ArrayList<>();
-        adapterFilme = new AdapterFilme(getApplicationContext(),filmeList);
-        recyclerView_filmes.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
-        recyclerView_filmes.setHasFixedSize(true);
-        recyclerView_filmes.setAdapter(adapterFilme);
 
-        Filme filme1 = new Filme(R.drawable.ic_launcher_background,"teste");
-        filmeList.add(filme1);
-        Filme filme2 = new Filme(R.drawable.ic_launcher_background,"teste");
-        filmeList.add(filme2);
-        Filme filme3 = new Filme(R.drawable.ic_launcher_background,"teste");
-        filmeList.add(filme3);
-        Filme filme4 = new Filme(R.drawable.ic_launcher_background,"teste");
-        filmeList.add(filme4);
-        Filme filme5 = new Filme(R.drawable.ic_launcher_background,"teste");
-        filmeList.add(filme5);
-        Filme filme6 = new Filme(R.drawable.ic_launcher_background,"teste");
-        filmeList.add(filme6);
-        Filme filme7 = new Filme(R.drawable.ic_launcher_background,"teste");
-        filmeList.add(filme7);
-        Filme filme8 = new Filme(R.drawable.ic_launcher_background,"teste");
-        filmeList.add(filme8);
+
+// Configurar retrofit
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://firebasestorage.googleapis.com/v0/b/app-tia.firebasestorage.app/o/")
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        // Iniciar a retrofit
+        FilmeApi filmeApi = retrofit.create(FilmeApi.class);
+        Call<List<Filme>> call = filmeApi.getFilmes();
+        call.enqueue(new Callback<List<Filme>>() {
+            @Override
+            public void onResponse(Call<List<Filme>> call, Response<List<Filme>> response) {
+                if (response.code() != 200){
+                    return;
+                }
+                List<Filme> filmes = response.body();
+
+                for (Filme filme : filmes){
+                    filmeList.add(filme);
+                }
+                adapterFilme = new AdapterFilme(getApplicationContext(),filmeList);
+                recyclerView_filmes.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+                recyclerView_filmes.setHasFixedSize(true);
+                recyclerView_filmes.setAdapter(adapterFilme);
+            }
+
+            @Override
+            public void onFailure(Call<List<Filme>> call, Throwable t) {
+
+            }
+        });
     }
     public  void IniciarComponestes(){
         recyclerView_filmes = findViewById(R.id.recyclerView_filmes);
