@@ -31,12 +31,12 @@ Este projeto foi criado para consolidar habilidades em lógica de programação,
 
 <div style="text-align: center; margin-bottom: 20px;">
   <h3 style="color: #673AB7;">Abertura do App e Galeria de Filmes</h3>
-  <img src="https://i.imgur.com/VDRLUo5.gif" alt="Abertura do app e galeria" style="width: 80%; border: 2px solid #ddd; border-radius: 10px; margin-top: 10px;">
+  <img src="https://i.imgur.com/keJEtfV.gif" alt="Abertura do app e galeria" style="width: 80%; border: 2px solid #ddd; border-radius: 10px; margin-top: 10px;">
 </div>
 
 <div style="text-align: center; margin-bottom: 20px;">
   <h3 style="color: #673AB7;">Descrição e Reprodução do Filme</h3>
-  <img src="https://i.imgur.com/LxwDo3W.gif" alt="Descrição e reprodução do filme" style="width: 80%; border: 2px solid #ddd; border-radius: 10px; margin-top: 10px;">
+  <img src="https://i.imgur.com/gMY3guo.gif" alt="Descrição e reprodução do filme" style="width: 80%; border: 2px solid #ddd; border-radius: 10px; margin-top: 10px;">
 </div>
 
 <p style="text-align: center; font-size: 14px; font-family: Arial, sans-serif; color: #888;">Nota: As imagens são meramente ilustrativas e podem variar de acordo com os dados obtidos via JSON.</p>
